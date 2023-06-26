@@ -1,0 +1,41 @@
+﻿@model List<BengkelMotorApp.ViewModel.ServiceTypeViewModel>
+@{
+   ViewData["Title"] = "ServiceType";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">List Service Type</h3>
+                    <a href="@Url.Action("Create", "ServiceType")"><button class="btn btn-primary btn-sm">Create</button></a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Price</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit","ServiceType",new { id = item.Id })"><button class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</button></a>
+                                        <a href="@Url.Action("Delete","ServiceType",new { id = item.Id })"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" ></i> Delete</button></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model List<BengkelMotorApp.ViewModel.SparePartViewModel>
+@{
+   ViewData["Title"] = "SparePart";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">List Spare Part</h3>
+                    <a href="@Url.Action("Create", "SparePart")"><button class="btn btn-primary btn-sm">Create</button></a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Stock</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit","SparePart",new { id = item.Id })"><button class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</button></a>
+                                        <a href="@Url.Action("Delete","SparePart",new { id = item.Id })"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" ></i> Delete</button></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model BengkelMotorApp.ViewModel.SparePartViewModel
+@{
+    ViewData["Title"] = "Create Sparepart";
+}
+
+<h1>Create Sparepart</h1>
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-default">
+        @using (Html.BeginForm("Edit", "SparePart", FormMethod.Post, new { @id = "quickform" }))
+        {
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input type="hidden" name="Id" value="@Model.Id"/>
+                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Name" value="@Model.Name" maxlength="200" required>
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description</label>
+                    <input type="text" class="form-control" id="Description" name="Description" placeholder="Description" value="@Model.Description">
+                </div>
+                <div class="form-group">
+                    <label for="Price">Price</label>
+                    <input type="number" class="form-control" id="Price" name="Price" placeholder="Price" value="@Model.Price">
+                </div>
+                <div class="form-group">
+                    <label for="Stock">Stock</label>
+                    <input type="number" class="form-control" id="Stock" name="Stock" placeholder="Stock" value="@Model.Stock">
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="@Url.Action("Index","SparePart")" class="btn btn-danger">Back</a>
+            </div>
+        }
+    </div>
+    <!-- /.card -->
+</div>

@@ -1,0 +1,63 @@
+﻿@using BengkelMotorApp.ViewModel;
+@model ViewTransactionViewModel
+@{
+    ViewData["Title"] = "Transaction";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Transaction</h3>
+                    <a href="@Url.Action("Create", "Transaction")"><button class="btn btn-primary btn-sm">Create</button></a> 
+                    <div>
+                        <form method="get" action="@Url.Action("Index", "Transaction")">
+                            <div class="row">
+                                
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="StartDate" placeholder="End Date" value="@Model.filterTransactionViewModel.StartDate" />
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="EndDate" placeholder="End Date" value="@Model.filterTransactionViewModel.EndDate" />
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                @*<th>Customer Address</th>*@
+                                <th>No</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.transactionViewModels)
+                            {
+                                <tr>
+                                    <td>@item.CustomerId</td>
+                                    @*<td>@item.CustomerAddress</td>*@
+                                    <td>@item.TransactionNumber</td>
+                                    <td>@String.Format("{0:dd-MM-yyyy}",item.TransactionDate)</td>
+                                    <td>@item.TotalPrice</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit","Transaction",new { id = item.Id })"><button class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</button></a>
+                                        <a href="@Url.Action("Delete","Transaction",new { id = item.Id })"><button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

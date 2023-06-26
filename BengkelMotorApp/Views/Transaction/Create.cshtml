@@ -1,0 +1,107 @@
+﻿<h1>Create Service Type</h1>
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-default">
+        @using (Html.BeginForm("Create", "Transaction", FormMethod.Post, new { @id = "quickform" }))
+        {
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="Name">Customer</label>
+                    <select class="form-control" id="CustomerId" name="CustomerId">
+                        @foreach (var item in ViewBag.Customers)
+                        {
+                            <option value="@item.Id">@item.Label</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="TransactionNumber">TransactionNumber</label>
+                    <input type="text" class="form-control" id="TransactionNumber" name="TransactionNumber" placeholder="No">
+                </div>
+                <div class="form-group">
+                    <label for="TransactionDate">TransactionDate</label>
+                    <input type="text" class="form-control" id="TransactionDate" name="TransactionDate" placeholder="Date">
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="details">
+                            <div class="row">
+                                <div class="col-3">
+
+                                </div>
+                                <div class="col-3"></div>
+                                <div class="col-3"></div>
+                                <div class="col-1">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               @* <div class="form-group">
+                    <label for="ServiceTypeId">Service Type</label>
+                    <select class="form-control" id="ServiceTypeId" name="ServiceTypeId">
+                        @foreach (var item in ViewBag.ServiceType)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>*@
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="@Url.Action("Index","Transaction")" class="btn btn-danger">Back</a>
+            </div>
+        }
+    </div>
+    <!-- /.card -->
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var i = 0;
+            $("#ServiceTypeId").change(function () {
+                var id = $(this).val();
+                $.ajax({
+                    url: "/Transaction/GetServiceType",
+                    data: { id: id },
+                    type: "GET",
+                    dataType: "JSON",
+                    success: function (data) {
+                        var html = '';
+                        html += '<div class="row" id="row' + i + '">';
+                        html += '<div class="col-3">';
+                        html += '<input type="hidden" name="ServiceTypeId" value="' + data.id + '"/>';
+                        html += '<input type="text" class="form-control" id="Name" name="Name" placeholder="Name" value="' + data.name + '" maxlength="200" required>';
+                        html += '</div>';
+                        html += '<div class="col-3">';
+                        html += '<input type="number" class="form-control" id="Price" name="Price" placeholder="Price" value="' + data.price + '">';
+                        html += '</div>';
+                        html += '<div class="col-3">';
+                        html += '<input type="number" class="form-control" id="Quantity" name="Quantity" placeholder="Quantity" value="1">';
+                        html += '</div>';
+                        html += '<div class="col-1">';
+                        html += '<button type="button" class="btn btn-danger" onclick="remove(' + i + ')">X</button>';
+                        html += '</div>';
+                        html += '</div>';
+                        $('.details').append(html);
+                        i++;
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+        });
+
+        function remove(id) {
+            $('#row' + id).remove();
+        }
+    </script>
+}
+```
+

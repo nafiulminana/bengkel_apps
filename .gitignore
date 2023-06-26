@@ -1,0 +1,19 @@
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+#svn
+.svn/*
+
+#visual studio
+.vs/*
+
+bin/*
+
+obj/*
+
+BengkelMotorApp/bin/*
+BengkelMotorApp/obj/*
